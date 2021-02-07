@@ -13,6 +13,7 @@ if (typeof window != 'undefined') {
 function TicTacToe(grid) {
     this.container = grid;
     this.winner = ""
+    this.lastMove = playerTwo
 
     this.setCellWin = function (row, column) {
         const element = document.getElementById(row + '_' + column)
@@ -107,10 +108,13 @@ function TicTacToe(grid) {
         const position = element.id.split('_')
         console.log("Row:" + position[0] + "Column:" + position[1])
         if (this.winner === '') {
-            if (event.ctrlKey) {
+            if (this.lastMove === playerTwo) {
                 element.innerText = playerOne
+                this.lastMove = playerOne
             } else {
                 element.innerText = playerTwo
+                this.lastMove = playerTwo
+
             }
             this.check()
             if (this.winner !== '') {
